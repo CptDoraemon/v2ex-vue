@@ -1,21 +1,37 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <Button type="primary">Button</Button>
-  </div>
+  <a-layout class="root">
+    <side-bar :collapsed="collapsed"/>
+    <a-layout>
+      <global-header :collapsed="collapsed" @toggle-collapsed="toggleCollapsed"/>
+      <router-view/>
+    </a-layout>
+  </a-layout>
 </template>
 
 <script>
-import { Button } from 'ant-design-vue';
-
-export default {
-  name: 'App',
-  components: {
-    Button
+  import SideBar from "./components/SideBar";
+  import GlobalHeader from "./components/GlobalHeader";
+  export default {
+    name: 'App',
+    components: {
+      GlobalHeader,
+      SideBar,
+    },
+    data() {
+      return {
+        collapsed: false,
+      };
+    },
+    methods: {
+      toggleCollapsed: function () {
+        this.collapsed = !this.collapsed
+      }
+    }
   }
-}
 </script>
 
-<style>
-
+<style scoped>
+  .root {
+    min-height: 100vh;
+  }
 </style>
