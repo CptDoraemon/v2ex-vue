@@ -1,24 +1,4 @@
 # v2ex-vue
 
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+A simple client to present data from [v2ex api](https://www.v2ex.com/p/7v9tec53).  
+Core packages used: Vue.js, Vuex, Vue-router, and Ant Design.
