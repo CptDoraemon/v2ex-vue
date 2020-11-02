@@ -4,7 +4,13 @@
       <a-spin tip="Fetching Posts..." />
     </div>
     <div class="message-container" v-if="isError">
-      <a-result status="error" title="Server Error" :sub-title="errorMessage" />
+      <a-result status="error" title="Server Error" :sub-title="errorMessage">
+        <template #extra>
+          <a-button type="primary" @click="fetchData">
+            Try Again
+          </a-button>
+        </template>
+      </a-result>
     </div>
     <post-card v-for="(item, index) in data" :key="index" :data="item"/>
   </a-layout-content>
