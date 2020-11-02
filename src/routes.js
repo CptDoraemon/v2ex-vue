@@ -1,15 +1,18 @@
-import MainContent from "./components/MainContent";
 import VueRouter from "vue-router";
+import PostList from "./components/PostList";
+import AboutPage from "./components/AboutPage";
 
 const routes = {
   root: '/',
   new: '/tab/new',
-  popular: '/tab/popular'
+  popular: '/tab/popular',
+  about: '/about',
 };
 
 const routerRoutes = [
   { path: '/', redirect: routes.new },
-  { path: '/tab/:tab', component: MainContent }
+  { path: '/tab/:tab', component: PostList },
+  { path: '/about', component: AboutPage }
 ];
 
 const router = new VueRouter({

@@ -3,13 +3,22 @@
     <h1 class="title">
       v2ex-vue
     </h1>
-    <a-menu theme="dark" mode="inline" :selectedKeys="selected">
-      <router-link v-for="(obj, key) in menuItems" :to="obj.link" :key="key">
+    <a-menu theme="dark" mode="inline" :selectedKeys="selectedTab" :defaultOpenKeys="['tabs']">
+
+      <a-sub-menu title="Tabs" key="tabs">
+        <router-link v-for="(obj, key) in menuItems" :to="obj.link" :key="key">
+          <a-menu-item>
+            <span class="menu-item">{{key}}</span>
+          </a-menu-item>
+        </router-link>
+      </a-sub-menu>
+
+      <router-link :to="routes.about">
         <a-menu-item>
-          <a-icon type="user" />
-          <span class="menu-item">{{key}}</span>
+          <span class="menu-item">About</span>
         </a-menu-item>
       </router-link>
+
     </a-menu>
   </a-layout-sider>
 </template>
@@ -22,6 +31,7 @@ export default {
   components: {},
   data: function() {
     return {
+      routes,
       menuItems: {
         new: {
           link: routes.new
@@ -36,7 +46,7 @@ export default {
     collapsed: Boolean
   },
   computed: {
-    selected: vm => [vm.$route.params.tab]
+    selectedTab: vm => vm.$route.params.tab === undefined ? [] : [vm.$route.params.tab.toString()]
   }
 }
 </script>

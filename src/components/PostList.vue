@@ -1,5 +1,5 @@
 <template>
-  <a-layout-content class="content">
+  <main-content-wrapper>
     <div class="message-container" v-if="isLoading">
       <a-spin tip="Fetching Posts..." />
     </div>
@@ -12,17 +12,20 @@
         </template>
       </a-result>
     </div>
-    <post-card v-for="(item, index) in data" :key="index" :data="item"/>
-  </a-layout-content>
+    <div class="posts-container" v-if="data">
+      <post-card v-for="(item, index) in data" :key="index" :data="item"/>
+    </div>
+  </main-content-wrapper>
 </template>
 
 <script>
   import { mapState, mapGetters } from 'vuex'
   import PostCard from "./PostCard";
+  import MainContentWrapper from "./MainContentWrapper";
 
   export default {
     name: 'MainContent',
-    components: {PostCard},
+    components: {MainContentWrapper, PostCard},
     computed: {
       ...mapState('postData', ['data', 'errorMessage', 'isLoading']),
       ...mapGetters('postData', ['isError']),
@@ -47,11 +50,6 @@
 </script>
 
 <style scoped>
-  .content {
-    background: #fff;
-    margin: 16px;
-    padding: 16px;
-  }
   .message-container {
     width: 100%;
     min-height: 400px;
@@ -59,5 +57,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+  }
+  .posts-container {
+    width: 100%;
   }
 </style>
