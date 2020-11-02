@@ -4,7 +4,7 @@
       <a-spin tip="Fetching Posts..." />
     </div>
     <div class="message-container" v-if="isError">
-      <a-result status="warning" :title="errorMessage"/>
+      <a-result status="error" title="Server Error" :sub-title="errorMessage" />
     </div>
     <post-card v-for="(item, index) in data" :key="index" :data="item"/>
   </a-layout-content>

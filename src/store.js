@@ -38,7 +38,8 @@ const postData = {
         const res = await axios.get(url);
         commit('endFetchingWithData', res.data.data);
       } catch (e) {
-        commit('endFetchingWithError', e.response.message || 'server error');
+        const message = e.response && e.response.message ? e.response.message : 'Failed to fetch the post data at the moment, please try again later.';
+        commit('endFetchingWithError', message);
       }
     },
     fetchData: ({dispatch}, tab) => {
