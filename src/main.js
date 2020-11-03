@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
-import { Layout, Menu, Icon, Spin, Result, Button, Tooltip, Select } from 'ant-design-vue';
+import { Layout, Menu, Icon, Spin, Result, Button, Tooltip, Select, BackTop } from 'ant-design-vue';
 import VueRouter from "vue-router";
 import {router} from "./routes";
 
@@ -19,6 +19,7 @@ Vue.component(Button.name, Button);
 Vue.component(Tooltip.name, Tooltip);
 Vue.component(Select.name, Select);
 Vue.component(Select.Option.name, Select.Option);
+Vue.component(BackTop.name, BackTop);
 
 Vue.use(VueRouter);
 

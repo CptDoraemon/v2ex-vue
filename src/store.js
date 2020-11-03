@@ -43,7 +43,6 @@ const postData = {
       state.isLoading = false;
     },
     changeSortBy: (state, newSortBy) => {
-      console.log(newSortBy);
       state.sortBy = newSortBy;
     },
     changeSortOrder: (state, newSortOrder) => {

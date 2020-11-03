@@ -4,7 +4,7 @@
       <span>
         Sort by:
       </span>
-      <a-select :value="sortBy" @change="changeSortBy">
+      <a-select :value="sortBy" @change="changeSortBy" :style="selectStyle" :dropdownStyle="optionStyle">
         <a-select-option v-for="option in sortByOptions" :value="option" :key="option">
           {{option}}
         </a-select-option>
@@ -14,7 +14,7 @@
       <span>
         Sort order:
       </span>
-      <a-select :value="sortOrder" @change="changeSortOrder">
+      <a-select :value="sortOrder" @change="changeSortOrder" :style="selectStyle" :dropdownStyle="optionStyle">
         <a-select-option v-for="option in sortOrderOptions" :value="option" :key="option">
           {{option}}
         </a-select-option>
@@ -28,6 +28,17 @@
 
   export default {
     name: 'PostListOptions',
+    data: function() {
+      return {
+        selectStyle: {
+          minWidth: '150px',
+          textTransform: 'capitalize'
+        },
+        optionStyle: {
+          textTransform: 'capitalize'
+        }
+      }
+    },
     computed: {
       ...mapState('postData', ['sortBy', 'sortByOptions', 'sortOrder', 'sortOrderOptions']),
     },

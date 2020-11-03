@@ -5,19 +5,24 @@
     </h1>
     <a-menu theme="dark" mode="inline" :selectedKeys="selectedTab" :defaultOpenKeys="['tabs']">
 
-      <a-sub-menu title="Tabs" key="tabs">
-        <router-link v-for="(obj, key) in menuItems" :to="obj.link" :key="key">
-          <a-menu-item>
+      <a-sub-menu key="tabs">
+        <span slot="title">
+          <a-icon type="appstore" />
+          <span class="menu-item">Tabs</span>
+        </span>
+        <a-menu-item v-for="(obj, key) in menuItems" :key="key">
+          <router-link :to="obj.link">
             <span class="menu-item">{{key}}</span>
-          </a-menu-item>
-        </router-link>
+          </router-link>
+        </a-menu-item>
       </a-sub-menu>
 
-      <router-link :to="routes.about">
-        <a-menu-item>
+      <a-menu-item>
+        <router-link :to="routes.about">
+          <a-icon type="team" />
           <span class="menu-item">About</span>
-        </a-menu-item>
-      </router-link>
+        </router-link>
+      </a-menu-item>
 
     </a-menu>
   </a-layout-sider>
