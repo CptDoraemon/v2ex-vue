@@ -1,8 +1,8 @@
 <template>
   <a-layout class="layout-root">
-    <side-bar :collapsed="collapsed"/>
+    <side-bar :collapsed="isMenuCollapsed"/>
     <a-layout>
-      <global-header :collapsed="collapsed" @toggle-collapsed="toggleCollapsed"/>
+      <global-header :collapsed.sync="isMenuCollapsed"/>
       <router-view/>
     </a-layout>
   </a-layout>
@@ -19,13 +19,8 @@
     },
     data() {
       return {
-        collapsed: false,
+        isMenuCollapsed: false,
       };
-    },
-    methods: {
-      toggleCollapsed: function () {
-        this.collapsed = !this.collapsed
-      }
     }
   }
 </script>

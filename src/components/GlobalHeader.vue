@@ -3,7 +3,7 @@
     <a-icon
         class="trigger"
         :type="collapsed ? 'menu-unfold' : 'menu-fold'"
-        @click="$emit('toggle-collapsed')"
+        @click="$emit('update:collapsed', !collapsed)"
     />
   </a-layout-header>
 </template>
@@ -18,7 +18,9 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="less">
+  @import '../theme';
+
   .trigger {
     font-size: 18px;
     line-height: 64px;
@@ -27,6 +29,6 @@
     transition: color 0.3s;
   }
   .trigger:hover {
-    color: #1890ff;
+    color: @primary-color;
   }
 </style>
