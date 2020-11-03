@@ -1,5 +1,5 @@
 <template>
-  <a-layout class="root">
+  <a-layout class="layout-root">
     <side-bar :collapsed="collapsed"/>
     <a-layout>
       <global-header :collapsed="collapsed" @toggle-collapsed="toggleCollapsed"/>
@@ -30,8 +30,9 @@
   }
 </script>
 
-<style scoped>
-  .root {
+<style lang="less">
+  @import "theme.less";
+  .layout-root {
     min-height: 100vh;
   }
 </style>

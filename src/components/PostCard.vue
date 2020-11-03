@@ -64,7 +64,7 @@
 </script>
 
 <style scoped lang="less">
-  @import "~ant-design-vue/dist/antd.less";
+  @import "../theme";
 
   .root {
     background-color: #fff;

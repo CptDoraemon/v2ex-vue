@@ -12,7 +12,10 @@
         </template>
       </a-result>
     </div>
-    <div class="posts-container" v-if="data">
+    <div class="posts-container" v-if="hasData">
+      <div>
+        <post-list-options/>
+      </div>
       <post-card v-for="(item, index) in data" :key="index" :data="item"/>
     </div>
   </main-content-wrapper>
@@ -22,13 +25,14 @@
   import { mapState, mapGetters } from 'vuex'
   import PostCard from "./PostCard";
   import MainContentWrapper from "./MainContentWrapper";
+  import PostListOptions from "./PostListOptions";
 
   export default {
-    name: 'MainContent',
-    components: {MainContentWrapper, PostCard},
+    name: 'PostList',
+    components: {PostListOptions, MainContentWrapper, PostCard},
     computed: {
-      ...mapState('postData', ['data', 'errorMessage', 'isLoading']),
-      ...mapGetters('postData', ['isError']),
+      ...mapState('postData', ['errorMessage', 'isLoading', 'sortBy']),
+      ...mapGetters('postData', ['isError', 'data', 'hasData']),
       tab: vm => vm.$route.params.tab
     },
     methods: {
