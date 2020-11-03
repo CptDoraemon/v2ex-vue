@@ -3,7 +3,7 @@
     <h1 class="title">
       v2ex-vue
     </h1>
-    <a-menu theme="dark" mode="inline" :selectedKeys="selectedTab" :defaultOpenKeys="['tabs']">
+    <a-menu theme="dark" mode="inline" :selectedKeys="selectedTab" :defaultOpenKeys="collapsed ? null : ['tabs']">
 
       <a-sub-menu key="tabs">
         <span slot="title">

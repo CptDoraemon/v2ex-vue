@@ -23,7 +23,7 @@
         isMenuCollapsed: false,
       };
     },
-    mounted() {
+    created() {
       if (window.innerWidth < 800) {
         this.isMenuCollapsed = true
       }
@@ -40,5 +40,11 @@
   .ant-back-top {
     bottom: 50px;
     right: 50px;
+  }
+  @media only screen and (max-width: @screen-md) {
+    .ant-back-top {
+      bottom: 20px;
+      right: 20px;
+    }
   }
 </style>
