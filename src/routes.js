@@ -11,7 +11,13 @@ const routes = {
 
 const routerRoutes = [
   { path: '/', redirect: routes.new },
-  { path: '/tab/:tab', component: PostList },
+  {
+    path: '/tab/:tab',
+    component: PostList,
+    props: route => ({
+      tab: route.params.tab
+    })
+  },
   { path: '/about', component: AboutPage }
 ];
 

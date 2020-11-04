@@ -30,10 +30,12 @@
   export default {
     name: 'PostList',
     components: {PostListOptions, MainContentWrapper, PostCard},
+    props: {
+      tab: String
+    },
     computed: {
       ...mapState('postData', ['errorMessage', 'isLoading', 'sortBy', 'data']),
-      ...mapGetters('postData', ['isError', 'hasData']),
-      tab: vm => vm.$route.params.tab
+      ...mapGetters('postData', ['isError', 'hasData'])
     },
     methods: {
       fetchData() {
@@ -46,7 +48,7 @@
     watch: {
       tab: function(val, oldVal) {
         if (val !== oldVal) {
-          this.fetchData();
+          this.fetchData()
         }
       }
     }
