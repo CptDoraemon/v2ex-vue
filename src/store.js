@@ -1,5 +1,5 @@
 import Vuex from 'vuex'
-import {cloneDeep} from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 import axios from 'axios';
 import Vue from "vue";
 import createLogger from 'vuex/dist/logger'
