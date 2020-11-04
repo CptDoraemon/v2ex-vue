@@ -12,7 +12,7 @@
         </template>
       </a-result>
     </div>
-    <div class="posts-container" v-if="hasData">
+    <div class="posts-container" v-if="!isLoading && hasData">
       <div>
         <post-list-options/>
       </div>
@@ -31,8 +31,8 @@
     name: 'PostList',
     components: {PostListOptions, MainContentWrapper, PostCard},
     computed: {
-      ...mapState('postData', ['errorMessage', 'isLoading', 'sortBy']),
-      ...mapGetters('postData', ['isError', 'data', 'hasData']),
+      ...mapState('postData', ['errorMessage', 'isLoading', 'sortBy', 'data']),
+      ...mapGetters('postData', ['isError', 'hasData']),
       tab: vm => vm.$route.params.tab
     },
     methods: {

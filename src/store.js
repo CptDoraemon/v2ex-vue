@@ -7,7 +7,7 @@ import createLogger from 'vuex/dist/logger'
 const postData = {
   namespaced: true,
   state: {
-    rawData: [],
+    data: [],
     isLoading: false,
     errorMessage: '',
     sortBy: 'created',
@@ -17,44 +17,54 @@ const postData = {
   },
   getters: {
     isError: state => state.errorMessage !== '',
-    data: state => {
-      const sortOrder = state.sortOrder === 'descending' ? -1 : 1;
-      const sortBy = state.sortBy;
-      const data = cloneDeep(state.rawData);
-      data.sort((a, b) => (a[sortBy] - b[sortBy]) * sortOrder);
-      return data
-    },
     hasData: state => {
-      return state.rawData.length > 0;
+      return state.data.length > 0;
     }
   },
   mutations: {
     startFetching: state => {
-      state.rawData = [];
+      state.data = [];
       state.isLoading = true;
       state.errorMessage = ''
     },
     endFetchingWithData: (state, data) => {
-      state.rawData = cloneDeep(data);
+      state.data = cloneDeep(data);
       state.isLoading = false;
     },
     endFetchingWithError: (state, errorMessage) => {
       state.errorMessage = errorMessage;
       state.isLoading = false;
     },
-    changeSortBy: (state, newSortBy) => {
-      state.sortBy = newSortBy;
+    changeSort: (state, option) => {
+      ['sortBy', 'sortOrder'].forEach(key => {
+        if (option[key] !== undefined) {
+          state[key] = option[key]
+        }
+      })
     },
-    changeSortOrder: (state, newSortOrder) => {
-      state.sortOrder = newSortOrder;
+    sortData: (state) => {
+      const sortOrder = state.sortOrder === 'descending' ? -1 : 1;
+      const sortBy = state.sortBy;
+      const data = cloneDeep(state.data);
+      data.sort((a, b) => (a[sortBy] - b[sortBy]) * sortOrder);
+      state.data = data;
+    },
+    setIsLoading: (state, isLoading) => {
+      state.isLoading = isLoading;
     }
   },
   actions: {
-    changeSortBy: ({commit}, newSortBy) => {
-      commit('changeSortBy', newSortBy);
+    changeSort: ({state, commit, dispatch}, option) => {
+      if (state.isLoading) {
+        return
+      }
+      commit('changeSort', option);
+      dispatch('_sortData')
     },
-    changeSortOrder: ({commit}, newSortOrder) => {
-      commit('changeSortOrder', newSortOrder);
+    _sortData: ({commit}) => {
+      commit('setIsLoading', true);
+      setTimeout(() => commit('sortData'));
+      setTimeout(() => commit('setIsLoading', false));
     },
     _fetchData: async ({commit, state}, url) => {
       try {
@@ -73,18 +83,15 @@ const postData = {
       switch (tab) {
         case 'new':
           dispatch('_fetchData', 'https://www.xiaoxihome.com/api/v2ex/new');
-          dispatch('changeSortBy', 'created');
-          dispatch('changeSortOrder', 'descending');
+          dispatch('changeSort', {sortBy: 'created', sortOrder: 'descending'});
           break;
         case 'popular':
           dispatch('_fetchData', 'https://www.xiaoxihome.com/api/v2ex/popular');
-          dispatch('changeSortBy', 'replies');
-          dispatch('changeSortOrder', 'descending');
+          dispatch('changeSort', {sortBy: 'replies', sortOrder: 'descending'});
           break;
         default:
           dispatch('_fetchData', 'https://www.xiaoxihome.com/api/v2ex/new');
-          dispatch('changeSortBy', 'created');
-          dispatch('changeSortOrder', 'descending');
+          dispatch('changeSort', {sortBy: 'created', sortOrder: 'descending'});
       }
     }
   }

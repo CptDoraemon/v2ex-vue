@@ -4,7 +4,7 @@
       <span>
         Sort by:
       </span>
-      <a-select :value="sortBy" @change="changeSortBy" :style="selectStyle" :dropdownStyle="optionStyle">
+      <a-select :value="sortBy" @change="(value) => changeSort({sortBy: value})" :style="selectStyle" :dropdownStyle="optionStyle">
         <a-select-option v-for="option in sortByOptions" :value="option" :key="option">
           {{option}}
         </a-select-option>
@@ -14,7 +14,7 @@
       <span>
         Sort order:
       </span>
-      <a-select :value="sortOrder" @change="changeSortOrder" :style="selectStyle" :dropdownStyle="optionStyle">
+      <a-select :value="sortOrder" @change="(value) => changeSort({sortOrder: value})" :style="selectStyle" :dropdownStyle="optionStyle">
         <a-select-option v-for="option in sortOrderOptions" :value="option" :key="option">
           {{option}}
         </a-select-option>
@@ -43,7 +43,7 @@
       ...mapState('postData', ['sortBy', 'sortByOptions', 'sortOrder', 'sortOrderOptions']),
     },
     methods: {
-      ...mapActions('postData', ['changeSortBy', 'changeSortOrder']),
+      ...mapActions('postData', ['changeSort']),
     }
   }
 </script>
